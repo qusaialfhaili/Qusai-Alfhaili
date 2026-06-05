@@ -1,0 +1,883 @@
+﻿<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="dark" data-lang="ar">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="google-site-verification" content="lb7QkdgZVbKOLmL_HRGYr88h_xlbm218wUuYZv9PXcU" />
+  <title>Qusai Alfhaili</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Tajawal:wght@300;400;500;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet"/>
+  <link rel="icon" href="./images/icon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="./css/styles.css" />
+</head>
+<body>
+
+  <div id="loadingScreen" class="loading-screen">
+    <div class="load-inner">
+      <div class="load-logo">
+        <img src="./images/logo.png" alt="QF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <div class="load-monogram" style="display:none">QF</div>
+      </div>
+      <div class="load-bar-wrap">
+        <div class="load-bar"></div>
+      </div>
+      <p class="load-label" data-ar="جارٍ التحميل..." data-en="Loading...">جارٍ التحميل...</p>
+    </div>
+  </div>
+
+  <canvas id="bgCanvas" aria-hidden="true"></canvas>
+
+  <nav id="sidenav" class="sidenav" aria-label="primary navigation">
+    <div class="sidenav-logo">
+      <img src="./images/logo.png" alt="Qusai Alfhaili Logo" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-fallback" style="display:none">QF</div>
+    </div>
+
+    <ul class="sidenav-links">
+      <li><a href="#home" class="snav-link active" data-section="home">
+        <i class="fa-solid fa-house"></i>
+        <span data-ar="الرئيسية" data-en="Home">الرئيسية</span>
+      </a></li>
+      <li><a href="#about" class="snav-link" data-section="about">
+        <i class="fa-solid fa-user"></i>
+        <span data-ar="عنّي" data-en="About">عنّي</span>
+      </a></li>
+      <li><a href="#skills" class="snav-link" data-section="skills">
+        <i class="fa-solid fa-code"></i>
+        <span data-ar="المهارات" data-en="Skills">المهارات</span>
+      </a></li>
+      <li><a href="#education" class="snav-link" data-section="education">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span data-ar="التعليم" data-en="Education">التعليم</span>
+      </a></li>
+      <li><a href="#goals" class="snav-link" data-section="goals">
+        <i class="fa-solid fa-bullseye"></i>
+        <span data-ar="الأهداف" data-en="Goals">الأهداف</span>
+      </a></li>
+      <li><a href="#achievements" class="snav-link" data-section="achievements">
+        <i class="fa-solid fa-trophy"></i>
+        <span data-ar="الشهادات" data-en="Certs">الشهادات</span>
+      </a></li>
+      <li><a href="#projects" class="snav-link" data-section="projects">
+        <i class="fa-solid fa-folder-open"></i>
+        <span data-ar="المشاريع" data-en="Projects">المشاريع</span>
+      </a></li>
+      <li><a href="#portfolio" class="snav-link" data-section="portfolio">
+        <i class="fa-solid fa-palette"></i>
+        <span data-ar="التصميمات" data-en="Designs">التصميمات</span>
+      </a></li>
+      <li><a href="#contact" class="snav-link" data-section="contact">
+        <i class="fa-solid fa-paper-plane"></i>
+        <span data-ar="تواصل" data-en="Contact">تواصل</span>
+      </a></li>
+    </ul>
+
+    <div class="sidenav-actions">
+      <button id="themeToggle" class="icon-btn" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun" id="sunIcon"></i>
+        <i class="fa-solid fa-moon" id="moonIcon"></i>
+      </button>
+      <button id="langToggle" class="icon-btn lang-btn" aria-label="Toggle language">
+        <span>EN</span>
+      </button>
+    </div>
+  </nav>
+
+  <header class="mobile-topbar">
+    <div class="mobile-logo">
+      <img src="./images/logo.png" alt="QF" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+      <div class="logo-fallback-sm" style="display:none">QF</div>
+    </div>
+    <div class="mobile-actions">
+      <button id="themeToggleMobile" class="icon-btn" aria-label="Toggle theme">
+        <i class="fa-solid fa-sun"></i>
+      </button>
+      <button id="langToggleMobile" class="icon-btn lang-btn" aria-label="Toggle language">
+        <span>EN</span>
+      </button>
+      <button id="menuToggle" class="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div id="mobileDrawer" class="mobile-drawer" role="dialog" aria-label="Navigation menu">
+    <ul>
+      <li><a href="#home" class="drawer-link" data-ar="الرئيسية" data-en="Home">الرئيسية</a></li>
+      <li><a href="#about" class="drawer-link" data-ar="عنّي" data-en="About">عنّي</a></li>
+      <li><a href="#skills" class="drawer-link" data-ar="المهارات" data-en="Skills">المهارات</a></li>
+      <li><a href="#education" class="drawer-link" data-ar="التعليم" data-en="Education">التعليم</a></li>
+      <li><a href="#goals" class="drawer-link" data-ar="الأهداف" data-en="Goals">الأهداف</a></li>
+      <li><a href="#achievements" class="drawer-link" data-ar="الشهادات" data-en="Certs">الشهادات</a></li>
+      <li><a href="#projects" class="drawer-link" data-ar="المشاريع" data-en="Projects">المشاريع</a></li>
+      <li><a href="#portfolio" class="drawer-link" data-ar="التصميمات" data-en="Designs">التصميمات</a></li>
+      <li><a href="#contact" class="drawer-link" data-ar="تواصل" data-en="Contact">تواصل</a></li>
+    </ul>
+  </div>
+  <div id="drawerOverlay" class="drawer-overlay"></div>
+
+  <main class="main-content" id="mainContent">
+
+    <section id="home" class="section hero-section">
+      <div class="hero-grid">
+        <div class="hero-text reveal-up">
+          <div class="badge-row">
+            <span class="badge"><i class="fa-solid fa-wifi"></i> <span data-ar="متاح للعمل" data-en="Available for work">متاح للعمل</span></span>
+            <span class="badge badge-outline">IT • Level 3</span>
+          </div>
+
+          <h1 class="hero-name">
+            <span class="name-ar" data-ar="قُصَي الفُحَيلي" data-en="Qusai Alfhaili">قُصَي الفُحَيلي</span>
+          </h1>
+
+          <div class="hero-roles">
+            <span class="role-tag" data-ar="أمن سيبراني" data-en="Cyber Security">أمن سيبراني</span>
+            <span class="role-sep">·</span>
+            <span class="role-tag" data-ar="تطوير ويب" data-en="Web Dev">تطوير ويب</span>
+            <span class="role-sep">·</span>
+            <span class="role-tag" data-ar="ذكاء اصطناعي" data-en="AI">ذكاء اصطناعي</span>
+          </div>
+
+          <p class="hero-desc" data-ar="مبرمج ومتخصص في الأمن السيبراني وتطوير الويب والذكاء الاصطناعي. أسعى دائماً لتطوير نفسي واكتساب مهارات جديدة. أمتلك خبرة واسعة في IT وحاصل على شهادات تقنية متعددة." data-en="Programmer specializing in Cybersecurity, Web Development, and AI. I continuously push to grow and acquire new skills. Experienced in IT with multiple technical certifications.">مبرمج ومتخصص في الأمن السيبراني وتطوير الويب والذكاء الاصطناعي. أسعى دائماً لتطوير نفسي واكتساب مهارات جديدة. أمتلك خبرة واسعة في IT وحاصل على شهادات تقنية متعددة.</p>
+
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#projects">
+              <i class="fa-solid fa-rocket"></i>
+              <span data-ar="استكشف مشاريعي" data-en="Explore Projects">استكشف مشاريعي</span>
+            </a>
+            <a class="btn btn-ghost" href="#contact">
+              <i class="fa-solid fa-envelope"></i>
+              <span data-ar="تواصل معي" data-en="Contact Me">تواصل معي</span>
+            </a>
+          </div>
+
+          <div class="social-strip">
+            <a href="https://snapchat.com/t/giOGx0tE" target="_blank" rel="noopener" class="social-icon sc-snap" aria-label="Snapchat"><i class="fa-brands fa-snapchat"></i></a>
+            <a href="https://www.instagram.com/v.xqz7" target="_blank" rel="noopener" class="social-icon sc-ig" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+            <a href="https://wa.me/0779400804" target="_blank" rel="noopener" class="social-icon sc-wa" aria-label="WhatsApp"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://discordapp.com/users/1475187234654392351" target="_blank" rel="noopener" class="social-icon sc-discord" aria-label="Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="https://github.com/qusaialfhaili" target="_blank" rel="noopener" class="social-icon sc-github" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="https://www.linkedin.com/in/qusai-alfhaili-a647bb3bb" target="_blank" rel="noopener" class="social-icon sc-linkedin" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://www.facebook.com/qusai.z.alfhaili" target="_blank" rel="noopener" class="social-icon sc-fb" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="mailto:qusayalfhaili@gmail.com" class="social-icon sc-email" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-up" style="animation-delay:.2s">
+          <div class="profile-frame">
+            <div class="profile-ring"></div>
+            <div class="profile-img-wrap">
+              <img src="./images/profile.jpg" alt="Qusai Alfhaili" />
+            </div>
+            <div class="profile-glow"></div>
+          </div>
+
+          <div class="stat-cards">
+            <div class="stat-card">
+              <span class="stat-num">22+</span>
+              <span class="stat-lbl" data-ar="شهادة" data-en="Certs">شهادة</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num">9+</span>
+              <span class="stat-lbl" data-ar="مشروع" data-en="Projects">مشروع</span>
+            </div>
+            <div class="stat-card">
+              <span class="stat-num">3+</span>
+              <span class="stat-lbl" data-ar="سنوات" data-en="Years">سنوات</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scroll-hint">
+        <div class="scroll-mouse"><div class="scroll-wheel"></div></div>
+      </div>
+    </section>
+
+    <section id="expertise" class="section expertise-section">
+      <div class="expertise-track">
+        <div class="expertise-slide">
+          <span><i class="fa-brands fa-js"></i> JavaScript</span>
+          <span><i class="fa-brands fa-python"></i> Python</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Cyber Security</span>
+          <span><i class="fa-solid fa-globe"></i> Web Development</span>
+          <span><i class="fa-solid fa-brain"></i> Artificial Intelligence</span>
+          <span><i class="fa-solid fa-network-wired"></i> Networking</span>
+          <span><i class="fa-brands fa-html5"></i> HTML & CSS</span>
+          <span><i class="fa-brands fa-react"></i> React</span>
+          <span><i class="fa-brands fa-js"></i> JavaScript</span>
+          <span><i class="fa-brands fa-python"></i> Python</span>
+          <span><i class="fa-solid fa-shield-halved"></i> Cyber Security</span>
+          <span><i class="fa-solid fa-globe"></i> Web Development</span>
+          <span><i class="fa-solid fa-brain"></i> Artificial Intelligence</span>
+          <span><i class="fa-solid fa-network-wired"></i> Networking</span>
+          <span><i class="fa-brands fa-html5"></i> HTML & CSS</span>
+          <span><i class="fa-brands fa-react"></i> React</span>
+        </div>
+      </div>
+    </section>
+
+    <section id="about" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">01</span>
+          <h2 class="section-title" data-ar="نبذة عنّي" data-en="About Me">نبذة عنّي</h2>
+        </div>
+
+        <div class="about-grid reveal-up">
+          <div class="about-text">
+            <p data-ar="مبرمج ومتخصص في <strong>الأمن السيبراني</strong> و<strong>تطوير الويب</strong> والذكاء الاصطناعي. أسعى دائماً لتطوير نفسي واكتساب مهارات جديدة في التقنية والبرمجة." data-en="Programmer specializing in <strong>Cybersecurity</strong> and <strong>Web Development</strong> and AI. I continuously strive to grow and acquire new skills in technology and programming.">مبرمج ومتخصص في <strong>الأمن السيبراني</strong> و<strong>تطوير الويب</strong> والذكاء الاصطناعي. أسعى دائماً لتطوير نفسي واكتساب مهارات جديدة في التقنية والبرمجة.</p>
+
+            <div class="info-grid">
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-user-tag"></i></span>
+                <div>
+                  <span class="info-key" data-ar="الاسم" data-en="Name">الاسم</span>
+                  <span class="info-val" data-ar="قصي الفحيلي" data-en="Qusai Alfhaili">قصي الفحيلي</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-cake-candles"></i></span>
+                <div>
+                  <span class="info-key" data-ar="المواليد" data-en="Born">المواليد</span>
+                  <span class="info-val">17/10/2008</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-laptop-code"></i></span>
+                <div>
+                  <span class="info-key" data-ar="التخصص" data-en="Major">التخصص</span>
+                  <span class="info-val">Information Technology</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-location-dot"></i></span>
+                <div>
+                  <span class="info-key" data-ar="الإقامة" data-en="Location">الإقامة</span>
+                  <span class="info-val" data-ar="الأردن 🇯🇴" data-en="Jordan 🇯🇴">الأردن 🇯🇴</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-language"></i></span>
+                <div>
+                  <span class="info-key" data-ar="اللغات" data-en="Languages">اللغات</span>
+                  <span class="info-val" data-ar="العربية • English" data-en="Arabic • English">العربية • English</span>
+                </div>
+              </div>
+              <div class="info-item">
+                <span class="info-icon"><i class="fa-solid fa-layer-group"></i></span>
+                <div>
+                  <span class="info-key" data-ar="المستوى" data-en="Level">المستوى</span>
+                  <span class="info-val">Level 2 & 3</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="interests-column">
+            <h3 class="col-heading" data-ar="الاهتمامات" data-en="Interests">الاهتمامات</h3>
+            <div class="interest-tags">
+              <span class="itag"><i class="fa-solid fa-shield-halved"></i> Cyber Security</span>
+              <span class="itag"><i class="fa-solid fa-code"></i> Programming</span>
+              <span class="itag"><i class="fa-solid fa-globe"></i> Web Dev</span>
+              <span class="itag"><i class="fa-solid fa-brain"></i> AI</span>
+              <span class="itag"><i class="fa-solid fa-camera"></i> Photography</span>
+              <span class="itag"><i class="fa-solid fa-book-open"></i> Reading</span>
+              <span class="itag"><i class="fa-solid fa-video"></i> Video Design</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">02</span>
+          <h2 class="section-title" data-ar="المهارات" data-en="Skills">المهارات</h2>
+        </div>
+
+        <div class="skills-container reveal-up">
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>HTML & CSS</span><span class="skill-pct">90%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:90%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Python</span><span class="skill-pct">92%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:92%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>JavaScript</span><span class="skill-pct">80%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:80%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Basic Networking</span><span class="skill-pct">91%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:91%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Artificial Intelligence</span><span class="skill-pct">88%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:88%"></div></div>
+          </div>
+          <div class="skill-item">
+            <div class="skill-info">
+              <span>Cyber Security</span><span class="skill-pct">78%</span>
+            </div>
+            <div class="skill-track"><div class="skill-fill" style="--w:78%"></div></div>
+          </div>
+        </div>
+
+        <div class="tech-cards reveal-up">
+          <div class="tech-card">
+            <i class="fa-brands fa-js"></i>
+            <h4>Node.js + React</h4>
+            <p data-ar="واجهات ديناميكية وأداء عالي" data-en="Dynamic UIs with high performance">واجهات ديناميكية وأداء عالي</p>
+          </div>
+          <div class="tech-card">
+            <i class="fa-brands fa-python"></i>
+            <h4>Python & AI</h4>
+            <p data-ar="تحليل بيانات ونماذج ذكاء اصطناعي" data-en="Data analysis and AI models">تحليل بيانات ونماذج ذكاء اصطناعي</p>
+          </div>
+          <div class="tech-card">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h4>Cyber Security</h4>
+            <p data-ar="اختبار اختراق وحماية بيانات" data-en="Penetration testing and data protection">اختبار اختراق وحماية بيانات</p>
+          </div>
+          <div class="tech-card">
+            <i class="fa-solid fa-globe"></i>
+            <h4>Web Performance</h4>
+            <p data-ar="SEO وتجربة مستخدم سلسة" data-en="SEO and smooth user experience">SEO وتجربة مستخدم سلسة</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="education" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">03</span>
+          <h2 class="section-title" data-ar="التعليم" data-en="Education">التعليم</h2>
+        </div>
+
+        <div class="edu-timeline reveal-up">
+          <div class="edu-item">
+            <div class="edu-year">2024</div>
+            <div class="edu-card">
+              <h3>IT • Level 2</h3>
+              <ul>
+                <li data-ar="استخدام تكنولوجيا المعلومات في المؤسسات" data-en="Using IT to support organizations">استخدام تكنولوجيا المعلومات في المؤسسات</li>
+                <li data-ar="نمذجة البيانات وجداول البيانات" data-en="Data modeling and spreadsheets">نمذجة البيانات وجداول البيانات</li>
+                <li data-ar="شبكات الكمبيوتر" data-en="Computer Networks">شبكات الكمبيوتر</li>
+                <li data-ar="البرمجة" data-en="Programming">البرمجة</li>
+                <li data-ar="الرسومات الرقمية والرسوم المتحركة" data-en="Digital Graphics & Animation">الرسومات الرقمية والرسوم المتحركة</li>
+                <li data-ar="تطوير مواقع الويب" data-en="Web Development">تطوير مواقع الويب</li>
+                <li data-ar="تصميم الألعاب" data-en="Game Design">تصميم الألعاب</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="edu-item">
+            <div class="edu-year">2025–2026</div>
+            <div class="edu-card">
+              <h3>IT • Level 3</h3>
+              <h4 data-ar="السنة الأولى" data-en="Year One">السنة الأولى</h4>
+              <ul>
+                <li data-ar="أنظمة تكنولوجيا المعلومات الاستراتيجية" data-en="Strategic IT Systems">أنظمة تكنولوجيا المعلومات الاستراتيجية</li>
+                <li data-ar="تطوير المواقع الإلكترونية" data-en="Web Development">تطوير المواقع الإلكترونية</li>
+                <li data-ar="تطوير تطبيقات الهاتف" data-en="Mobile App Development">تطوير تطبيقات الهاتف</li>
+                <li data-ar="تطوير الألعاب" data-en="Game Development">تطوير الألعاب</li>
+                <li data-ar="الدعم الفني وإدارة IT" data-en="IT Support & Management">الدعم الفني وإدارة IT</li>
+              </ul>
+              <h4 data-ar="السنة الثانية" data-en="Year Two">السنة الثانية</h4>
+              <ul>
+                <li data-ar="الأمن السيبراني وإدارة الحوادث" data-en="Cybersecurity & Incident Management">الأمن السيبراني وإدارة الحوادث</li>
+                <li data-ar="البرمجة المتقدمة" data-en="Advanced Programming">البرمجة المتقدمة</li>
+                <li data-ar="إدارة مشاريع IT" data-en="IT Project Management">إدارة مشاريع IT</li>
+                <li data-ar="مقدمة في الذكاء الاصطناعي" data-en="Introduction to AI">مقدمة في الذكاء الاصطناعي</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="goals" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">04</span>
+          <h2 class="section-title" data-ar="الأهداف والطموح" data-en="Goals & Ambitions">الأهداف والطموح</h2>
+        </div>
+
+        <div class="goals-grid reveal-up">
+          <div class="goal-card">
+            <div class="goal-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h3 data-ar="التخصص في الأمن السيبراني" data-en="Specialize in Cybersecurity">التخصص في الأمن السيبراني</h3>
+            <p data-ar="تطوير مهارات عملية عبر مشاريع حقيقية في مجال الأمن السيبراني" data-en="Build practical skills through real Cybersecurity projects">تطوير مهارات عملية عبر مشاريع حقيقية في مجال الأمن السيبراني</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon"><i class="fa-solid fa-code"></i></div>
+            <h3 data-ar="تعميق مهارات البرمجة" data-en="Deepen Programming Skills">تعميق مهارات البرمجة</h3>
+            <p data-ar="كتابة كود نظيف ومنظم وفعال بأعلى المعايير" data-en="Write clean, organized, and efficient code at the highest standards">كتابة كود نظيف ومنظم وفعال بأعلى المعايير</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon"><i class="fa-solid fa-trophy"></i></div>
+            <h3 data-ar="المشاركة في المسابقات" data-en="Compete in Competitions">المشاركة في المسابقات</h3>
+            <p data-ar="المنافسة لتحقيق مستوى متقدم في الأمن السيبراني" data-en="Compete to achieve an advanced level in Cybersecurity">المنافسة لتحقيق مستوى متقدم في الأمن السيبراني</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon"><i class="fa-solid fa-globe"></i></div>
+            <h3 data-ar="إنشاء مشاريع ويب احترافية" data-en="Create Professional Web Projects">إنشاء مشاريع ويب احترافية</h3>
+            <p data-ar="مشاريع آمنة وسريعة متوافقة مع أفضل المعايير" data-en="Secure and fast projects conforming to best standards">مشاريع آمنة وسريعة متوافقة مع أفضل المعايير</p>
+          </div>
+          <div class="goal-card">
+            <div class="goal-icon"><i class="fa-solid fa-rocket"></i></div>
+            <h3 data-ar="توسيع المعرفة التقنية" data-en="Expand Technical Knowledge">توسيع المعرفة التقنية</h3>
+            <p data-ar="متابعة أحدث التقنيات والابتكارات باستمرار" data-en="Continuously follow the latest technologies and innovations">متابعة أحدث التقنيات والابتكارات باستمرار</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievements" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">05</span>
+          <h2 class="section-title" data-ar="شهاداتي" data-en="My Certificates">شهاداتي</h2>
+        </div>
+
+        <div class="cert-slider-wrap reveal-up">
+          <button class="cert-arrow cert-prev" aria-label="Previous"><i class="fa-solid fa-chevron-right"></i></button>
+          <button class="cert-arrow cert-next" aria-label="Next"><i class="fa-solid fa-chevron-left"></i></button>
+
+          <div class="cert-slider" id="certSlider">
+            <div class="cert-slide" data-label="شهادة نهاية صف الاول ثانوي">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1ISxcQoIVDUYBDnaxp9ATJ90P4iKkCn4u" alt="شهادة نهاية صف الاول ثانوي" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة نهاية صف الاول ثانوي" data-en="End of 10th Grade Certificate">شهادة نهاية صف الاول ثانوي</p>
+            </div>
+            <div class="cert-slide" data-label="شهادة درجة تقييم D">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1b_N7acxsPflbv-Rwmp9eBv1r9pSmStK6" alt="شهادة درجة تقييم D" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة من المدرسة للحصول على درجة تقييم D" data-en="School Certificate for Grade D">شهادة من المدرسة للحصول على درجة تقييم D</p>
+            </div>
+            <div class="cert-slide" data-label="شهادة التفوق">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1M6X9qAFVi-yOVpVlOyj7ZW2eNkqfGxvg" alt="التفوق والتميز" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة التفوق والتميز في التحصيل العلمي" data-en="Academic Excellence Certificate">شهادة التفوق والتميز في التحصيل العلمي</p>
+            </div>
+            <div class="cert-slide" data-label="الطالب المثالي">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/18O8Up3mVmw9rpZlrwWpSEtX9iaUSR4sC" alt="الطالب المثالي" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة مسابقة الطالب المثالي" data-en="Ideal Student Competition Certificate">شهادة مسابقة الطالب المثالي</p>
+            </div>
+            <div class="cert-slide" data-label="الثاني ثانوي الفصل الأول">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/19BC06q4DDJALPIjZf3ye64rI3cVC4_nR" alt="الثاني ثانوي" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة الثاني ثانوي الفصل الاول" data-en="11th Grade First Semester Certificate">شهادة الثاني ثانوي الفصل الاول</p>
+            </div>
+            <div class="cert-slide" data-label="Python Essentials 1">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/16GbUvsU-_yF1Ysm24dkZdA6ZluMFZTqR" alt="Python Essentials 1" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Python Essentials 1</p>
+            </div>
+            <div class="cert-slide" data-label="Computer Essentials">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1tzmpTUPAc6RmXoQa7NREOwHRI0GD8FfR" alt="Computer Essentials" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Computer Essentials</p>
+            </div>
+            <div class="cert-slide" data-label="Internet & Email Essentials">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1Z82wloeiNg2M7VFME571VnmaCzI7mMix" alt="Internet & Email" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Internet & Email Essentials</p>
+            </div>
+            <div class="cert-slide" data-label="Word Processing">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1sO9u2FDvxmBqYgoj2HoTJm--ToEfuPcv" alt="Word Processing" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Word Processing</p>
+            </div>
+            <div class="cert-slide" data-label="Excel Spreadsheets">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1HcwNxEj3XEY-o8FvpanSww0hyPoyEjBX" alt="Excel" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Excel Spreadsheets</p>
+            </div>
+            <div class="cert-slide" data-label="ICDL Base">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1bNe3FWShoCfUBhYfvZa9uxdbbS3ewEvR" alt="ICDL Base" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>ICDL Base — International Computer Driving License</p>
+            </div>
+            <div class="cert-slide" data-label="Cyber Security Attack Techniques">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1IDpLBOlQrf60hM1qf2Dlk6FDFFSy_Y1B" alt="Cyber Security" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Cyber Security Attack Techniques</p>
+            </div>
+            <div class="cert-slide" data-label="IT Security Course">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1JhirhLRz8Fev7kZ2VmhNgN0jd5EwccmY" alt="IT Security" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>IT Security Course</p>
+            </div>
+            <div class="cert-slide" data-label="شهادة التفوق">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1Cc4fxUSqHVlYqE4LevSJTS5xeY3Wl6i3" alt="التفوق بالتحصيل العلمي" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p data-ar="شهادة التفوق بالتحصيل العلمي" data-en="Academic Achievement Certificate">شهادة التفوق بالتحصيل العلمي</p>
+            </div>
+            <div class="cert-slide" data-label="Future Programmers Arab Competition">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1a1wZ5DjczbNFZ7f7zMTtVsn-v-a5vsfA" alt="Future Programmers" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Future Programmers Arab Competition 15th Edition</p>
+            </div>
+            <div class="cert-slide" data-label="CrypteroCTF 2026 Finals">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1gXO7IB0Y0iEER4i2L3IppM0sVT4Y7Van" alt="CrypteroCTF" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>CrypteroCTF 2026 Finals Participant</p>
+            </div>
+            <div class="cert-slide" data-label="Write Your First C# Code">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1fzhMHyVLGwltoOV6tbReTbKbwZfgQmf3" alt="C# Code" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Write Your First C# Code</p>
+            </div>
+            <div class="cert-slide" data-label="Cyber Security Associate Course">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/16yPmvs7-9T_sx3o3drJWhBqRnJbun2I7" alt="Cyber Security Associate" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Cyber Security Associate Course</p>
+            </div>
+            <div class="cert-slide" data-label="Hack The Box Workshop">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1fnGDv-125VB4-GZhoWXCD4kpeIIfBHMS" alt="Hack The Box" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Hack The Box Workshop</p>
+            </div>
+            <div class="cert-slide" data-label="Cyber Security Associate">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1T06uLuv2TmnvxYPnfcm6-K0PWhuuM-mp" alt="Cyber Security Associate" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Cyber Security Associate</p>
+            </div>
+            <div class="cert-slide" data-label="Olympiad in AI — JOAI">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1qqHHkdkycxVPn1SBbw2NwiibMBqj7Uer" alt="JOAI" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Olympiad in Artificial Intelligence — JOAI</p>
+            </div>
+            <div class="cert-slide" data-label="Smortech Workshop">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1ljGGFc6p1bnB9nSf4T0mt99Vu6aMxzbj" alt="Smortech" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Smortech Workshop</p>
+            </div>
+            <div class="cert-slide" data-label="Volunteer work and its impact on society">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1Cr85TtSXqLLSCWWXcj9NgOO5miWYdXYS" alt="Volunteer work and its impact on society" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Volunteer work and its impact on society</p>
+            </div>
+            <div class="cert-slide" data-label="Sustainability and digital rights">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1ydFxxLwi-pIwdx35plmk2aIk0BVK4Mxn" alt="Sustainability and digital rights" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Sustainability and digital rights</p>
+            </div>
+            <div class="cert-slide" data-label="Cybercrimes">
+              <div class="cert-img-wrap">
+                <img loading="lazy" src="https://lh3.googleusercontent.com/d/1Ay1sZGQilLq0TjFFyAulXzsnGf-4Zk97" alt="Cybercrimes" draggable="false">
+                <div class="cert-overlay"><i class="fa-solid fa-shield"></i></div>
+              </div>
+              <p>Cybercrimes</p>
+            </div>
+          </div>
+
+          <div class="cert-dots" id="certDots"></div>
+          <div class="cert-counter">
+            <span id="certCurrent">1</span> / <span id="certTotal">25</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">06</span>
+          <h2 class="section-title" data-ar="مشاريعي" data-en="My Projects">مشاريعي</h2>
+        </div>
+        <div class="projects-grid reveal-up">
+          <a class="proj-card" href="https://qf-syber.web.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="منصة تعليمية احترافية في الأمن السيبراني" data-en="Professional Cybersecurity Learning Platform">منصة تعليمية احترافية في الأمن السيبراني</h3>
+              <p data-ar="منصة تعليمية احترافية شاملة تغطي جميع مجالات الأمن السيبراني مع شروحات عملية وتفاعلية." data-en="A professional educational platform covering cybersecurity from basics to advanced with practical interactive tutorials.">منصة تعليمية احترافية شاملة تغطي جميع مجالات الأمن السيبراني مع شروحات عملية وتفاعلية.</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://github.com/qusaialfhaili/Windows-Repair-GUI" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-brands fa-windows"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="أداة إصلاح Windows Repair GUI" data-en="Windows Repair GUI">أداة إصلاح Windows Repair GUI</h3>
+              <p data-ar="سكربت Batch تفاعلي لإصلاح مشاكل ويندوز الشائعة وتنظيف الملفات المؤقتة" data-en="Interactive Batch Script to repair common Windows issues and clean temp files">سكربت Batch تفاعلي لإصلاح مشاكل ويندوز الشائعة وتنظيف الملفات المؤقتة</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://dawat-incubator.web.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-hands-praying"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="حاضنة الأدعية" data-en="Dawat Incubator">حاضنة الأدعية</h3>
+              <p data-ar="مكان تضع فيه حاجتك ويُدعو لك إخوانك" data-en="A place to post your need and let your brothers pray for you">مكان تضع فيه حاجتك ويُدعو لك إخوانك</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://ms-school1.web.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-school"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="مدرسة منشية السلطة" data-en="Manshiyet Al-Sultan School">🏫 مدرسة منشية السلطة</h3>
+              <p data-ar="نرسم مستقبل أبنائنا بالعلم والقيم — محافظة المفرق" data-en="Shaping our children's future with knowledge and values — Mafraq">نرسم مستقبل أبنائنا بالعلم والقيم — محافظة المفرق</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qf-btecit.web.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-graduation-cap"></i></div>
+            <div class="proj-body">
+              <h3>🎓 QF BTEC IT</h3>
+              <p data-ar="منصة طلاب تعليمية" data-en="Educational student platform">منصة طلاب تعليمية</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://study-tawjihi-26.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-calendar-days"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="جدول دراسة التوجيهي - BTEC" data-en="Tawjihi Study Schedule - BTEC">📚 جدول دراسة التوجيهي - BTEC</h3>
+              <p data-ar="خطة شاملة لـ 33 وحدة دراسية في 15 أسبوع" data-en="Comprehensive plan for 33 units in 15 weeks">خطة شاملة لـ 33 وحدة دراسية في 15 أسبوع</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://guns.lol/qusai.08" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-star"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="Qusai World" data-en="Qusai World">🌌 Qusai World</h3>
+              <p data-ar="صفحتي الشخصية مع روابطي في مكان واحد" data-en="Personal page with all my links in one place">صفحتي الشخصية مع روابطي في مكان واحد</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qusai-alfhaili-btec-pearson.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-id-card-clip"></i></div>
+            <div class="proj-body">
+              <h3>📍 BTEC Pearson</h3>
+              <p data-ar="صفحة BTEC" data-en="BTEC page">صفحة BTEC</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qusai-alfhaili-jordan-project.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-flag"></i></div>
+            <div class="proj-body">
+              <h3 data-ar="Project Jordan 🇯🇴" data-en="Project Jordan 🇯🇴">Project Jordan 🇯🇴</h3>
+              <p data-ar="مشروع عن الأردن" data-en="Project about Jordan">مشروع عن الأردن</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qusai-alfhaili-calculator.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-calculator"></i></div>
+            <div class="proj-body">
+              <h3>🤍 Calculator</h3>
+              <p data-ar="آلة حاسبة بسيطة" data-en="Simple calculator app">آلة حاسبة بسيطة</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qusai-alfhaili-game-sabway.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-gamepad"></i></div>
+            <div class="proj-body">
+              <h3>🤎 Game Sabway</h3>
+              <p data-ar="لعبة ترفيهية خفيفة" data-en="Light entertainment game">لعبة ترفيهية خفيفة</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+          <a class="proj-card" href="https://qusai-alfhaili-font-decoration.netlify.app" target="_blank" rel="noopener">
+            <div class="proj-icon"><i class="fa-solid fa-font"></i></div>
+            <div class="proj-body">
+              <h3>🪅 Font Decoration</h3>
+              <p data-ar="زخرفة الخطوط العربية" data-en="Arabic font decoration tool">زخرفة الخطوط العربية</p>
+            </div>
+            <div class="proj-arrow"><i class="fa-solid fa-arrow-up-left"></i></div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <section id="portfolio" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">07</span>
+          <h2 class="section-title" data-ar="تصميماتي" data-en="My Designs">تصميماتي</h2>
+        </div>
+
+        <div class="portfolio-grid reveal-up">
+          <div class="portfolio-card">
+            <div class="portfolio-icon"><i class="fa-regular fa-file-pdf"></i></div>
+            <div class="portfolio-body">
+              <h3 data-ar="دوسية HTML" data-en="HTML Booklet">دوسية HTML</h3>
+              <p data-ar="دليلك للتميز في HTML" data-en="Your guide to excellence in HTML">دليلك للتميز في HTML</p>
+              <a class="btn btn-sm" href="https://drive.google.com/file/d/1ZTQdNJo6xgt1KSA8NKanBRXHG_plKLMr/view?usp=drive_link" target="_blank" rel="noopener">
+                <i class="fa-solid fa-eye"></i>
+                <span data-ar="عرض الملف" data-en="View File">عرض الملف</span>
+              </a>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="portfolio-icon"><i class="fa-regular fa-file-pdf"></i></div>
+            <div class="portfolio-body">
+              <h3 data-ar="السر الحقيقي لحل التقييمات" data-en="The Real Secret to Solving Assessments">السر الحقيقي لحل التقييمات</h3>
+              <p data-ar="الطريق الذكي من النجاح إلى الامتياز" data-en="The smart path from success to excellence">الطريق الذكي من النجاح إلى الامتياز</p>
+              <a class="btn btn-sm" href="https://drive.google.com/file/d/1Yrimojt0vlRwHPuWKZOTJWtg3yMMtGhb/view?usp=drive_link" target="_blank" rel="noopener">
+                <i class="fa-solid fa-eye"></i>
+                <span data-ar="عرض الملف" data-en="View File">عرض الملف</span>
+              </a>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="portfolio-icon"><i class="fa-regular fa-file-pdf"></i></div>
+            <div class="portfolio-body">
+              <h3 data-ar="تعلم برمجة — C#" data-en="Learn Programming — C#">تعلم برمجة — C#</h3>
+              <p data-ar="من الأساسيات حتى بناء برامجك الخاصة" data-en="From basics to building your own programs">من الأساسيات حتى بناء برامجك الخاصة</p>
+              <a class="btn btn-sm" href="https://drive.google.com/file/d/1BmKIok_hOhS-KxiHZj2Zfw-VQKU93Occ/view?usp=drive_link" target="_blank" rel="noopener">
+                <i class="fa-solid fa-eye"></i>
+                <span data-ar="عرض الملف" data-en="View File">عرض الملف</span>
+              </a>
+            </div>
+          </div>
+          <div class="portfolio-card">
+            <div class="portfolio-icon"><i class="fa-regular fa-file-pdf"></i></div>
+            <div class="portfolio-body">
+              <h3 data-ar="الأمن السيبراني" data-en="Cyber Security">الأمن السيبراني</h3>
+              <p data-ar="حماية بياناتك • كشف التهديدات • تعزيز أمانك الرقمي" data-en="Protect your data • Detect threats • Strengthen your digital security">حماية بياناتك • كشف التهديدات • تعزيز أمانك الرقمي</p>
+              <a class="btn btn-sm" href="https://drive.google.com/file/d/1jmFn36axR3RymvJGyBO6OoZGRBqaLFfD/view?usp=drive_link" target="_blank" rel="noopener">
+                <i class="fa-solid fa-eye"></i>
+                <span data-ar="عرض الملف" data-en="View File">عرض الملف</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="section">
+      <div class="section-inner">
+        <div class="section-header reveal-up">
+          <span class="section-num">08</span>
+          <h2 class="section-title" data-ar="تواصل معي" data-en="Get In Touch">تواصل معي</h2>
+        </div>
+
+        <div class="contact-grid reveal-up">
+          <div class="contact-info">
+            <p data-ar="هل لديك مشروع أو فكرة؟ أنا هنا للمساعدة! تواصل معي عبر النموذج أو أي من قنوات التواصل." data-en="Have a project or idea? I'm here to help! Reach out via the form or any of my social channels.">هل لديك مشروع أو فكرة؟ أنا هنا للمساعدة! تواصل معي عبر النموذج أو أي من قنوات التواصل.</p>
+            <div class="contact-links">
+              <a href="mailto:qusayalfhaili@gmail.com" class="contact-link">
+                <i class="fa-solid fa-envelope"></i>
+                <span>qusayalfhaili@gmail.com</span>
+              </a>
+              <a href="https://wa.me/0779400804" class="contact-link" target="_blank" rel="noopener">
+                <i class="fa-brands fa-whatsapp"></i>
+                <span>0779400804</span>
+              </a>
+              <a href="https://github.com/qusaialfhaili" class="contact-link" target="_blank" rel="noopener">
+                <i class="fa-brands fa-github"></i>
+                <span>qusaialfhaili</span>
+              </a>
+              <a href="https://www.linkedin.com/in/qusai-alfhaili-a647bb3bb" class="contact-link" target="_blank" rel="noopener">
+                <i class="fa-brands fa-linkedin-in"></i>
+                <span>Qusai Alfhaili</span>
+              </a>
+            </div>
+          </div>
+
+          <form class="contact-form" action="https://formspree.io/f/mjknoejn" method="POST">
+            <div class="form-field">
+              <label data-ar="الاسم" data-en="Name">الاسم</label>
+              <input type="text" name="name" required placeholder="..." />
+            </div>
+            <div class="form-field">
+              <label data-ar="البريد الإلكتروني" data-en="Email">البريد الإلكتروني</label>
+              <input type="email" name="email" placeholder="you@example.com" />
+            </div>
+            <div class="form-field">
+              <label data-ar="الرسالة" data-en="Message">الرسالة</label>
+              <textarea name="message" rows="5" required placeholder="..."></textarea>
+            </div>
+            <input type="hidden" name="_subject" value="New Contact — Qusai Portfolio">
+            <button type="submit" class="btn btn-primary submit-btn">
+              <i class="fa-solid fa-paper-plane"></i>
+              <span data-ar="إرسال الرسالة" data-en="Send Message">إرسال الرسالة</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <a href="#home" class="footer-logo">
+            <img src="./images/logo.png" alt="Logo" onerror="this.style.display='none'">
+            <span class="visually-hidden">Qusai Alfhaili</span>
+          </a>
+          <p class="footer-copy">
+            <span data-ar=" الابتكار — البرمجة — الاستكشاف 🌐" data-en=" Innovation — Code — Explore 🌐"> الابتكار — البرمجة — الاستكشاف 🌐</span>
+          </p>
+        </div>
+      </div>
+    </footer>
+
+  </main>
+
+  <script src="./js/script.js"></script>
+</body>
+</html>
