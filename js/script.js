@@ -2,7 +2,7 @@
 
 function swapLogosToProfile() {
   try {
-    const profileSrc = './images/profile.jpg';
+    const profileSrc = './images/my.jpg';
     const selectors = ['.load-logo img'];
     const imgs = new Set();
     selectors.forEach(sel => document.querySelectorAll(sel).forEach(i => imgs.add(i)));
